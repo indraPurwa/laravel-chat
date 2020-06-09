@@ -55851,6 +55851,15 @@ var app = new Vue({
   },
   created: function created() {
     this.fetchMessages();
+    Echo["private"]('chat').listenForWhisper('typing', function (e) {
+      console.log(e);
+    }) // .listen('MessageSent', (e) => {
+    //     this.messages.push({
+    //         message: e.message.message,
+    //         user: e.user
+    //     });
+    // })
+    ;
   },
   methods: {
     fetchMessages: function fetchMessages() {
@@ -55858,12 +55867,6 @@ var app = new Vue({
 
       axios.get('/messages').then(function (response) {
         _this.messages = response.data;
-      });
-      Echo["private"]('chat').listen('MessageSent', function (e) {
-        _this.messages.push({
-          message: e.message.message,
-          user: e.user
-        });
       });
     },
     addMessage: function addMessage(message) {

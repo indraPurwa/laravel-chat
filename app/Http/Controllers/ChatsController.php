@@ -45,11 +45,11 @@ class ChatsController extends Controller
         $user = Auth::user();
         $message = $user->messages()->create([
             'message' => $request->input('message')
-            ]);
+        ]);
         // dd($message);
 
         broadcast(new MessageSent($user, $message))->toOthers();
 
-        // return ['status' => 'Message Sent!'];
+        return ['status' => 'Message Sent!'];
     }
 }
