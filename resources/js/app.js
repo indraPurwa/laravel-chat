@@ -51,14 +51,14 @@ const app = new Vue({
     },
     methods: {
         fetchMessages() {
-            axios.get('/messages').then(response => {
+            axios.get('/laravel-chat/public/messages').then(response => {
                 this.messages = response.data;
             });
         },
         addMessage(message) {
             this.messages.push(message);
 
-            axios.post('/messages', message).then(response => {
+            axios.post('/laravel-chat/public/messages', message).then(response => {
               console.log(response.data);
             });
         }

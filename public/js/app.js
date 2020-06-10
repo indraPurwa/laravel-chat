@@ -55850,28 +55850,27 @@ var app = new Vue({
     messages: []
   },
   created: function created() {
+    var _this = this;
+
     this.fetchMessages();
-    Echo["private"]('chat').listenForWhisper('typing', function (e) {
-      console.log(e);
-    }) // .listen('MessageSent', (e) => {
-    //     this.messages.push({
-    //         message: e.message.message,
-    //         user: e.user
-    //     });
-    // })
-    ;
+    Echo["private"]('chat').listen('MessageSent', function (e) {
+      _this.messages.push({
+        message: e.message.message,
+        user: e.user
+      });
+    });
   },
   methods: {
     fetchMessages: function fetchMessages() {
-      var _this = this;
+      var _this2 = this;
 
-      axios.get('/messages').then(function (response) {
-        _this.messages = response.data;
+      axios.get('/laravel-chat/public/messages').then(function (response) {
+        _this2.messages = response.data;
       });
     },
     addMessage: function addMessage(message) {
       this.messages.push(message);
-      axios.post('/messages', message).then(function (response) {
+      axios.post('/laravel-chat/public/messages', message).then(function (response) {
         console.log(response.data);
       });
     }
@@ -55924,7 +55923,8 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "8a9c4f67c8b0533da172",
   cluster: "ap1",
-  forceTLS: true
+  forceTLS: true,
+  authEndpoint: 'https://c8170d220254.ngrok.io/laravel-chat/public/broadcasting/auth'
 });
 
 /***/ }),

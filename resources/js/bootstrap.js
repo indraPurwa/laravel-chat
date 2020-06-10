@@ -37,5 +37,6 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    forceTLS: true
+    forceTLS: true,
+    authEndpoint: 'https://c8170d220254.ngrok.io/laravel-chat/public/broadcasting/auth'
 });
