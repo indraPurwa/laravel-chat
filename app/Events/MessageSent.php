@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use App\User;
 use App\Message;
 
-class MessageSent
+class MessageSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -54,5 +54,7 @@ class MessageSent
     public function broadcastOn()
     {
         return new PrivateChannel('chat');
+        // return new PresenceChannel('chat');
+
     }
 }
