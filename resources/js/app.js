@@ -49,17 +49,24 @@ const app = new Vue({
             });
             Echo.private('chat')
                 .listen('MessageSent', (e) => {
-                this.messages.push({
-                    message: e.message.message,
-                    user: e.user
+                    console.log(e);
+                    this.messages.push({
+                        message: e.message.message,
+                        user: e.user
+                    });
                 });
-            });
+            // Echo.private(`order.${orderId}`)
+            //     .listen('ShippingStatusUpdated', (e) => {
+            //         console.log(e.update);
+            //     });
+
+
         },
         addMessage(message) {
             this.messages.push(message);
 
             axios.post('/messages', message).then(response => {
-              console.log(response.data);
+                console.log(response.data);
             });
         }
     }

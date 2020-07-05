@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
-
+use App\Order;
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -18,4 +18,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });
 Broadcast::channel('chat', function ($user) {
     return Auth::check();
-  });
+});
+Broadcast::channel('order.{orderId}', function ($user, $orderId) {
+    return $user->id === Order::findOrNew($orderId)->usermer_id;
+});

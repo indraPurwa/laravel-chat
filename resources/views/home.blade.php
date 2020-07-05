@@ -15,6 +15,13 @@
                     @endif
 
                     You are logged in!
+                    <form action="{{ url() }}">
+                        <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary">Pesan 1</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

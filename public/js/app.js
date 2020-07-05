@@ -1920,20 +1920,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user'],
+  props: ["user"],
   data: function data() {
     return {
-      newMessage: ''
+      newMessage: ""
     };
   },
   methods: {
     sendMessage: function sendMessage() {
-      this.$emit('messagesent', {
+      this.$emit("messagesent", {
         user: this.user,
         message: this.newMessage
       });
-      this.newMessage = '';
+      this.newMessage = "";
     }
   }
 });
@@ -43584,7 +43590,7 @@ var render = function() {
           attrs: { id: "btn-chat" },
           on: { click: _vm.sendMessage }
         },
-        [_vm._v("\n            Send\n        ")]
+        [_vm._v("Send")]
       )
     ])
   ])
@@ -55860,18 +55866,20 @@ var app = new Vue({
         _this.messages = response.data;
       });
       Echo["private"]('chat').listen('MessageSent', function (e) {
+        console.log(e);
+
         _this.messages.push({
           message: e.message.message,
           user: e.user
         });
       });
-    },
-    addMessage: function addMessage(message) {
-      this.messages.push(message);
-      axios.post('/messages', message).then(function (response) {
-        console.log(response.data);
-      });
-    }
+    } // addMessage(message) {
+    //     this.messages.push(message);
+    //     axios.post('/messages', message).then(response => {
+    //         console.log(response.data);
+    //     });
+    // }
+
   }
 });
 
@@ -56086,8 +56094,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\laravel-chat-me\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-chat-me\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\GITHUB\laravel-chat-me\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\GITHUB\laravel-chat-me\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
