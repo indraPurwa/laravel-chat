@@ -42,10 +42,12 @@ class OrderController extends Controller
         ]);
         $params = [
             'usermer_id' => $request->usermer_id,
-            'usermer_id' => Auth::user()->id,
+            'usercus_id' => Auth::user()->id,
             'status' => 'Pesanan masuk'
         ];
+        // dd($params);
         $order = Order::create($params);
+        // dd($order);
         broadcast(new ShippingStatusUpdated($order))->toOthers();
 
         redirect()->route('home')->with('success', 'Pesanan disimpan');

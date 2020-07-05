@@ -59,6 +59,7 @@
 </head>
 <body>
     <div id="app">
+        <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">

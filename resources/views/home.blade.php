@@ -15,13 +15,29 @@
                     @endif
 
                     You are logged in!
-                    <form action="{{ url() }}">
-                        <div class="form-group row">
-                            <div class="offset-sm-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary">Pesan 1</button>
+                    @if (Auth::user()->level==2)
+                        <form method="POST" action="{{ route('order.store') }}">
+                            <input type="hidden" name="usermer_id" value="1">
+                            @csrf
+                            @if ($errors->any())
+                                <div class="form-group">
+                                    <div class="alert alert-danger">
+                                        <ol>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ol>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="form-group row">
+                                <div class="offset-sm-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Pesan 1</button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                        
+                    @endif
                 </div>
             </div>
         </div>
