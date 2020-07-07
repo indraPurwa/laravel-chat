@@ -59,7 +59,9 @@
 </head>
 <body>
     <div id="app">
-        <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
+        @if (Auth::check())
+            <input type="hidden" id="user_id" value="{{ Auth::user()->id }}">
+        @endif
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -115,5 +117,6 @@
             @yield('content')
         </main>
     </div>
+
 </body>
 </html>

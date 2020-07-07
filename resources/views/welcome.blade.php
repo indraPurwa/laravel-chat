@@ -96,5 +96,68 @@
                 </div>
             </div>
         </div>
+        
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    {{-- <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script> --}}
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-messaging.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyBpsDMReWUuwT2jmuldGExGzJ2mugmC85k",
+        authDomain: "socialape-714df.firebaseapp.com",
+        databaseURL: "https://socialape-714df.firebaseio.com",
+        projectId: "socialape-714df",
+        storageBucket: "socialape-714df.appspot.com",
+        messagingSenderId: "977873463027",
+        appId: "1:977873463027:web:8c3da3a0c6a54f0ebc3986",
+        measurementId: "G-EEF6E5SWJ1"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
+    const messaging = firebase.messaging();
+    // Add the public key generated from the console here.
+    messaging.usePublicVapidKey("BOrFWYIl1zuHeyBmLgbF64kaCaPNkOcVa45PH35rd9hOHOAIO4G9sXE82UkCg_YHGPskZRCkF1Ex6vlnAxdAw8w");
+    
+    // Get Instance ID token. Initially this makes a network call, once retrieved
+    // subsequent calls to getToken will return from cache.
+    messaging.getToken().then((currentToken) => {
+        if (currentToken) {
+            sendTokenToServer(currentToken);
+            updateUIForPushEnabled(currentToken);
+        } else {
+            // Show permission request.
+            console.log('No Instance ID token available. Request permission to generate one.');
+            // Show permission UI.
+            updateUIForPushPermissionRequired();
+            setTokenSentToServer(false);
+        }
+    }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+        showToken('Error retrieving Instance ID token. ', err);
+        setTokenSentToServer(false);
+    });
+
+    // Callback fired if Instance ID token is updated.
+    messaging.onTokenRefresh(() => {
+    messaging.getToken().then((refreshedToken) => {
+        console.log('Token refreshed.');
+        // Indicate that the new Instance ID token has not yet been sent to the
+        // app server.
+        setTokenSentToServer(false);
+        // Send Instance ID token to app server.
+        sendTokenToServer(refreshedToken);
+        // ...
+    }).catch((err) => {
+        console.log('Unable to retrieve refreshed token ', err);
+        showToken('Unable to retrieve refreshed token ', err);
+    });
+    });
+    </script>
     </body>
 </html>
