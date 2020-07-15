@@ -41,7 +41,7 @@ const app = new Vue({
     },
     created() {
         this.fetchMessages();
-        this.fetchOrder();
+        // this.fetchOrder();
     },
     methods: {
         fetchMessages() {
@@ -57,13 +57,13 @@ const app = new Vue({
                     });
                 });
         },
-        fetchOrder(){
-            let user_id = document.getElementById('user_id').value;
-            Echo.private(`order.${user_id}`)
-                .listen('ShippingStatusUpdated', (e) => {
-                    console.log(e.update);
-                });
-        },
+        // fetchOrder(){
+        //     let user_id = document.getElementById('user_id').value;
+        //     Echo.private(`order.${user_id}`)
+        //         .listen('ShippingStatusUpdated', (e) => {
+        //             console.log(e.update);
+        //         });
+        // },
         addMessage(message) {
             this.messages.push(message);
 

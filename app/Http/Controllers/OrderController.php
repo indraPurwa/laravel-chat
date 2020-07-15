@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Order;
 use Illuminate\Support\Facades\Auth;
 use App\Events\ShippingStatusUpdated;
+use Illuminate\Support\Facades\Redis;
+use App\Order;
 
 class OrderController extends Controller
 {
@@ -16,7 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $value = Cache::get('key');
     }
 
     /**

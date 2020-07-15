@@ -55856,8 +55856,7 @@ var app = new Vue({
     messages: []
   },
   created: function created() {
-    this.fetchMessages();
-    this.fetchOrder();
+    this.fetchMessages(); // this.fetchOrder();
   },
   methods: {
     fetchMessages: function fetchMessages() {
@@ -55875,12 +55874,13 @@ var app = new Vue({
         });
       });
     },
-    fetchOrder: function fetchOrder() {
-      var user_id = document.getElementById('user_id').value;
-      Echo["private"]("order.".concat(user_id)).listen('ShippingStatusUpdated', function (e) {
-        console.log(e.update);
-      });
-    },
+    // fetchOrder(){
+    //     let user_id = document.getElementById('user_id').value;
+    //     Echo.private(`order.${user_id}`)
+    //         .listen('ShippingStatusUpdated', (e) => {
+    //             console.log(e.update);
+    //         });
+    // },
     addMessage: function addMessage(message) {
       this.messages.push(message);
       axios.post('/messages', message).then(function (response) {
@@ -55934,13 +55934,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "123456789",
-  // cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-  // forceTLS: true
-  forceTLS: false,
-  wsHost: window.location.hostname,
-  wsPort: 6002,
-  disableStats: true
+  key: "8a9c4f67c8b0533da172",
+  cluster: "ap1",
+  forceTLS: true // forceTLS: false,
+  // wsHost: window.location.hostname,
+  // wsPort: 6002,
+  // disableStats: true,
+
 });
 
 /***/ }),
@@ -56101,8 +56101,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\GITHUB\laravel-chat-me\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\GITHUB\laravel-chat-me\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\GITHUB\laravel-chat\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\GITHUB\laravel-chat\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
