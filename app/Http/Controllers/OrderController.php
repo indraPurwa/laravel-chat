@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Events\ShippingStatusUpdated;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
 use App\Order;
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
+use stdClass;
 
 class OrderController extends Controller
 {
@@ -15,9 +19,28 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $value = Cache::get('key');
+        $order=new stdClass;
+        $order->usermer_id=1;
+        $order->usercus_id=1;
+        $order->status='terkirim';
+
+        $sendTo = new stdClass;
+        $sendTo->email = 'gensbookcities@gmail.com';
+        $sendTo->name = 'indra';
+        // echo Cache::store('database')->get('bar');
+        // Cache::store('database')->put('bar','bax',600);
+        // Cache::put('users','indra',now()->addMinutes(1));
+        // echo Cache::get('users');
+        // echo cache('users');
+        // Mail::to($request->user())->send(new OrderShipped($order));
+        Mail::to($sendTo)
+            // ->send(new OrderShipped($order))
+            ->queue(new OrderShipped($order))
+            ;
+        // return (new \App\Mail\OrderShipped($order))->render();
+        echo 'ok';
     }
 
     /**
