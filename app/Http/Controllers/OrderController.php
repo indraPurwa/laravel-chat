@@ -24,7 +24,11 @@ class OrderController extends Controller
         $order=new stdClass;
         $order->usermer_id=1;
         $order->usercus_id=1;
+        
+        $order->uuid=uniqid();
         $order->status='terkirim';
+        $order->sender='gensbookcities@gmail.com';
+        $order->to='admin@gmail.com';
 
         $sendTo = new stdClass;
         $sendTo->email = 'gensbookcities@gmail.com';
@@ -36,8 +40,8 @@ class OrderController extends Controller
         // echo cache('users');
         // Mail::to($request->user())->send(new OrderShipped($order));
         Mail::to($sendTo)
-            // ->send(new OrderShipped($order))
-            ->queue(new OrderShipped($order))
+            ->send(new OrderShipped($order))
+            // ->queue(new OrderShipped($order))
             ;
         // return (new \App\Mail\OrderShipped($order))->render();
         echo 'ok';
