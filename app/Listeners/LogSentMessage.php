@@ -28,19 +28,14 @@ class LogSentMessage
     public function handle(MessageSent $event)
     {
         // dd($event);
-        // $uuid = $event->data['order']->uuid;
-        // echo $uuid;
-        // $email = Email::find($uuid);
-        // dd($email);
-        // $email->status = 'sent';
-        // $email->save();
 
-        $email=[
-            'uuid'=> $event->data['order']->uuid,
-            'sender'=> $event->data['order']->sender,
-            'to'=> $event->data['order']->to,
-            'status'=> 'sent',
-        ];
-        Email::create($email);
+        // save sent email to database
+        // $email=[
+        //     'uuid'=> $event->data['order']->uuid,
+        //     'sender'=> $event->data['order']->sender,
+        //     'to'=> $event->data['order']->to,
+        //     'status'=> 'sent',
+        // ];
+        // Email::create($email);
     }
 }

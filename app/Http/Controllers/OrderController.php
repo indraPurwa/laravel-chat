@@ -8,9 +8,13 @@ use App\Events\ShippingStatusUpdated;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Cache;
 use App\Order;
+use App\User;
 use App\Mail\OrderShipped;
 use Illuminate\Support\Facades\Mail;
 use stdClass;
+use App\Notifications\InvoicePaid;
+// use Illuminate\Notifications\ChannelManager;
+use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
 {
@@ -45,6 +49,33 @@ class OrderController extends Controller
             ;
         // return (new \App\Mail\OrderShipped($order))->render();
         echo 'ok';
+    }
+    public function sendNotifiation()
+    {
+        $invoice=new stdClass;
+        $invoice->id=1;
+        $invoice->code='4655666';
+        // Using The Notifiable Trait
+        $user = User::find(1);
+        $user->notify(new InvoicePaid($invoice));
+
+        //preview
+        // return (new \App\Notifications\InvoicePaid($invoice)) 
+        //         ->toMail($user);
+
+        // Using The Notification Facade
+        // $users=User::all();
+        // Notification::send($users, new InvoicePaid($invoice));
+        
+        echo 'sent';
+    }
+    public function accessNotifiation()
+    {
+        $user = User::find(1);
+
+        foreach ($user->notifications as $notification) {
+            print_r($notification->data); echo '<br/>';
+        }
     }
 
     /**

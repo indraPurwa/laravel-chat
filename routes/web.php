@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/sendnotif', 'OrderController@sendNotifiation');
+Route::get('/accessnotif', 'OrderController@accessNotifiation');
+
 Auth::routes();
 
 Route::get('/me', 'ChatsController@index');
