@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/tes', function () {
+    echo env('APP_DEBUG');
+});
 Route::get('/sendnotif', 'OrderController@sendNotifiation');
 Route::get('/accessnotif', 'OrderController@accessNotifiation');
 
